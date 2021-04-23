@@ -1,0 +1,9 @@
+/* app global css */
+body {
+  height: 100%;
+  overflow-y: hidden;
+  font-family: "Poppins", sans-serif;
+}
+
+.footer-center {
+}

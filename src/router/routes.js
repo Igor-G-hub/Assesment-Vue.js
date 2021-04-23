@@ -1,0 +1,22 @@
+const routes = [
+  {
+    path: "/",
+    component: () => import("src/layouts/Layout.vue"),
+    children: [
+      { path: "", component: () => import("src/pages/FirstPage.vue") },
+      {
+        path: "/by-country",
+        component: () => import("src/pages/SecondPage.vue")
+      }
+    ]
+  },
+
+  // Always leave this as last one,
+  // but you can also remove it
+  {
+    path: "*",
+    component: () => import("pages/Error404.vue")
+  }
+];
+
+export default routes;
