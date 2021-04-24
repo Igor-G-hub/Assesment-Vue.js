@@ -24,14 +24,13 @@
 </template>
 
 <script>
-// import FirstPage from "../pages/FirstPage.vue";
-// import SecondPage from "../pages/SecondPage.vue";
+// import Vue from "vue";
+// import { LineChart } from "../pages/LineChart";
+
+// Vue.component("line-chart", LineChart);
 
 export default {
-  components: {
-    // FirstPage,
-    // SecondPage
-  }
+  components: {}
 };
 </script>
 

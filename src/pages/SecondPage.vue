@@ -6,10 +6,5 @@
 </template>
 
 <script>
-import Chart from "./Chart.vue";
-export default {
-  components: {
-    Chart
-  }
-};
+export default {};
 </script>
