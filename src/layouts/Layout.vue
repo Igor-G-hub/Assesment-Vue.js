@@ -40,18 +40,11 @@ export default {
     const ddFirstDay = String(firstDay.getDate()).padStart(2, "0");
     firstDay = yyyyFirstDay + "-" + mmFirstDay + "-" + ddFirstDay;
 
-    // fetch(
-    //   `https://api.hnb.hr/tecajn/v1?datum-od=${firstDay}&datum-do=${lastDay}`
-    // )
-    //   .then(response => response.json())
-    //   .then(data => console.log(data));
-
     Axios.get(
-      `https://api.hnb.hr/tecajn/v1?datum-od=${firstDay}&datum-do=${lastDay}`,
-      { crossdomain: true }
-    ).then(res => {
-      console.log(res);
-    });
+      `https://api.hnb.hr/tecajn/v1?datum-od=${firstDay}&datum-do=${lastDay}`
+    )
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
   }
 };
 </script>
