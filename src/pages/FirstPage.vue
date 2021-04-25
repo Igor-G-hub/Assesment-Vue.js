@@ -1,47 +1,58 @@
 <template>
-  <q-page padding>
+  <q-page padding class="flex flex-center">
     <div class="small">
-      <line-chart :chart-data="datacollection"></line-chart>
-      <button @click="fillData()">Randomize</button>
+      <h5>Graph</h5>
+      <BarChart :chart-data="datacollection"></BarChart>
+      <Input />
     </div>
   </q-page>
 </template>
 
 <script>
-import LineChart from "./LineChart.vue";
+import BarChart from "./BarChart.vue";
+import Input from "./Select.vue";
 
 export default {
   components: {
-    LineChart
+    BarChart,
+    Input
   },
   data() {
     return {
       datacollection: null
     };
   },
-  mounted() {
+  created() {
     this.fillData();
   },
   methods: {
     fillData() {
       this.datacollection = {
-        labels: [this.getRandomInt(), this.getRandomInt()],
+        labels: [
+          "01-01-2021",
+          "02-01-2021",
+          "03-01-2021",
+          "04-01-2021",
+          "05-01-2021",
+          "06-01-2021",
+          "07-01-2021"
+        ],
         datasets: [
           {
-            label: "Data One",
+            label: "EUR",
             backgroundColor: "#f87979",
-            data: [this.getRandomInt(), this.getRandomInt()]
-          },
-          {
-            label: "Data One",
-            backgroundColor: "#f87979",
-            data: [this.getRandomInt(), this.getRandomInt()]
+            data: [
+              7.657876,
+              7.333333,
+              7.896452,
+              7.555555,
+              7.4758963,
+              7.4578966,
+              7.4575896
+            ]
           }
         ]
       };
-    },
-    getRandomInt() {
-      return Math.floor(Math.random() * (50 - 5 + 1)) + 5;
     }
   }
 };
@@ -50,6 +61,6 @@ export default {
 <style>
 .small {
   max-width: 600px;
-  margin: 150px auto;
+  margin: 100px auto;
 }
 </style>

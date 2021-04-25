@@ -8,8 +8,7 @@
       </q-toolbar>
     </q-header>
 
-    <q-page-container>
-      Layout
+    <q-page-container class="flex flex-center">
       <router-view />
     </q-page-container>
 
@@ -24,13 +23,36 @@
 </template>
 
 <script>
-// import Vue from "vue";
-// import { LineChart } from "../pages/LineChart";
-
-// Vue.component("line-chart", LineChart);
-
+import Axios from "axios";
 export default {
-  components: {}
+  components: {},
+  mounted() {
+    const today = new Date();
+    const yyyyLastDay = today.getFullYear();
+    const mmLastDay = String(today.getMonth() + 1).padStart(2, "0");
+    const ddLastDay = String(today.getDate()).padStart(2, "0");
+    const lastDay = yyyyLastDay + "-" + mmLastDay + "-" + ddLastDay;
+
+    let firstDay = new Date(today);
+    firstDay.setDate(firstDay.getDate() - 6);
+    const yyyyFirstDay = firstDay.getFullYear();
+    const mmFirstDay = String(firstDay.getMonth() + 1).padStart(2, "0");
+    const ddFirstDay = String(firstDay.getDate()).padStart(2, "0");
+    firstDay = yyyyFirstDay + "-" + mmFirstDay + "-" + ddFirstDay;
+
+    // fetch(
+    //   `https://api.hnb.hr/tecajn/v1?datum-od=${firstDay}&datum-do=${lastDay}`
+    // )
+    //   .then(response => response.json())
+    //   .then(data => console.log(data));
+
+    Axios.get(
+      `https://api.hnb.hr/tecajn/v1?datum-od=${firstDay}&datum-do=${lastDay}`,
+      { crossdomain: true }
+    ).then(res => {
+      console.log(res);
+    });
+  }
 };
 </script>
 
