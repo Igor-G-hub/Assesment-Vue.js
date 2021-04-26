@@ -7,11 +7,9 @@
         </q-toolbar-title>
       </q-toolbar>
     </q-header>
-
     <q-page-container class="flex flex-center">
       <router-view />
     </q-page-container>
-
     <q-footer elevated class="bg-grey-8 text-white footer-center">
       <q-toolbar>
         <q-toolbar-title class="justify-center">
@@ -24,27 +22,38 @@
 
 <script>
 import Axios from "axios";
+import { mapGetters, mapActions } from "vuex";
 export default {
   components: {},
+  methods: {
+    ...mapActions("store", ["fetchingData"])
+  },
+  computed: {
+    ...mapGetters("store", ["test"])
+  },
+
   mounted() {
-    const today = new Date();
-    const yyyyLastDay = today.getFullYear();
-    const mmLastDay = String(today.getMonth() + 1).padStart(2, "0");
-    const ddLastDay = String(today.getDate()).padStart(2, "0");
-    const lastDay = yyyyLastDay + "-" + mmLastDay + "-" + ddLastDay;
+    this.fetchingData();
 
-    let firstDay = new Date(today);
-    firstDay.setDate(firstDay.getDate() - 6);
-    const yyyyFirstDay = firstDay.getFullYear();
-    const mmFirstDay = String(firstDay.getMonth() + 1).padStart(2, "0");
-    const ddFirstDay = String(firstDay.getDate()).padStart(2, "0");
-    firstDay = yyyyFirstDay + "-" + mmFirstDay + "-" + ddFirstDay;
+    // const today = new Date();
+    // const yyyyLastDay = today.getFullYear();
+    // const mmLastDay = String(today.getMonth() + 1).padStart(2, "0");
+    // const ddLastDay = String(today.getDate()).padStart(2, "0");
+    // const lastDay = yyyyLastDay + "-" + mmLastDay + "-" + ddLastDay;
 
-    Axios.get(
-      `https://api.hnb.hr/tecajn/v1?datum-od=${firstDay}&datum-do=${lastDay}`
-    )
-      .then(res => console.log(res))
-      .catch(err => console.log(err));
+    // let firstDay = new Date(today);
+    // const rangeOfDays = 6;
+    // firstDay.setDate(firstDay.getDate() - rangeOfDays);
+    // const yyyyFirstDay = firstDay.getFullYear();
+    // const mmFirstDay = String(firstDay.getMonth() + 1).padStart(2, "0");
+    // const ddFirstDay = String(firstDay.getDate()).padStart(2, "0");
+    // firstDay = yyyyFirstDay + "-" + mmFirstDay + "-" + ddFirstDay;
+
+    // Axios.get(
+    //   `https://api.hnb.hr/tecajn/v1?datum-od=${firstDay}&datum-do=${lastDay}`
+    // );
+    // // .then(res => console.log(""))
+    // // .catch(err => console.log(err));
   }
 };
 </script>
