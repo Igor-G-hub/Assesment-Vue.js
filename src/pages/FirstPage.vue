@@ -3,23 +3,24 @@
     <div class="small">
       <h5>Graph</h5>
       <BarChart :chart-data="datacollection"></BarChart>
-      <Input />
+      <SelectFirst :option="options" />
     </div>
   </q-page>
 </template>
 
 <script>
 import BarChart from "./BarChart.vue";
-import Input from "./Select.vue";
+import SelectFirst from "./SelectFirst.vue";
 
 export default {
   components: {
     BarChart,
-    Input
+    SelectFirst
   },
   data() {
     return {
-      datacollection: null
+      datacollection: null,
+      options: ["EUR", "USD", "AUD", "HRK"]
     };
   },
   created() {

@@ -1,17 +1,24 @@
 import Axios from "axios";
 
 const state = {
-  data: [123456]
+  data: [],
+  selectedCurrencyFirstGraph: ""
 };
 
 const mutations = {
   setData: (state, res) => {
     state.data = res;
+    console.log("mutations setData", res);
+  },
+
+  setCurrencyFirstGraph: (state, payload) => {
+    // console.log("mutations setCurrencyFirstGraph", payload);
+    state.selectedCurrencyFirstGraph = payload;
   }
 };
 
 const actions = {
-  fetchingData: async ({ commit }) => {
+  fetchingData: ({ commit }) => {
     Axios.get("https://api.hnb.hr/tecajn/v1?datum=2014-03-02")
       .then(res => commit("setData", res.data))
       .catch(err => console.log(err));
@@ -19,7 +26,9 @@ const actions = {
 };
 
 const getters = {
-  test: state => state.data
+  test: state => state.data,
+
+  proba: state => console.log("getters", test)
 };
 
 export default {
