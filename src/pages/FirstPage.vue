@@ -3,7 +3,8 @@
     <div class="small">
       <h5>Graph</h5>
       <BarChart :chart-data="datacollection"></BarChart>
-      <SelectFirst :option="options" />
+      <SelectFirst :selectOptions="options" :fillData="fillData" />
+      <button @click="debuger()">Debugger</button>
     </div>
   </q-page>
 </template>
@@ -11,6 +12,7 @@
 <script>
 import BarChart from "./BarChart.vue";
 import SelectFirst from "./SelectFirst.vue";
+import { mapGetters } from "vuex";
 
 export default {
   components: {
@@ -20,12 +22,13 @@ export default {
   data() {
     return {
       datacollection: null,
-      options: ["EUR", "USD", "AUD", "HRK"]
+      options: []
     };
   },
   created() {
     this.fillData();
   },
+
   methods: {
     fillData() {
       this.datacollection = {
@@ -40,7 +43,7 @@ export default {
         ],
         datasets: [
           {
-            label: "EUR",
+            label: this.labelSetFirstGraph,
             backgroundColor: "#f87979",
             data: [
               7.657876,
@@ -54,7 +57,16 @@ export default {
           }
         ]
       };
+      this.options = this.optionsFirstGraph;
+    },
+    debuger() {
+      this.fillData();
+      console.log("debugger", this.optionsFirstGraph);
     }
+  },
+  computed: {
+    ...mapGetters("store", ["labelSetFirstGraph"]),
+    ...mapGetters("store", ["optionsFirstGraph"])
   }
 };
 </script>

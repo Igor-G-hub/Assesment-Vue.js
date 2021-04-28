@@ -1,7 +1,10 @@
 <template>
   <div>
     <q-select
-      @input="setCurrency()"
+      @input="
+        setCurrency();
+        fillData();
+      "
       standout="bg-red text-white"
       v-model="value"
       :options="options"
@@ -15,19 +18,18 @@ import { mapMutations, mapState } from "vuex";
 
 export default {
   name: "Input",
-  props: ["option"],
+  props: ["selectOptions", "fillData"],
   data() {
     return {
       value: "",
-      options: this.$props.option
+      options: this.$props.selectOptions
     };
   },
   methods: {
     ...mapState("store", ["selectedCurrencyFirstGraph"]),
     ...mapMutations("store", ["setCurrencyFirstGraph"]),
     debuger() {
-      localStorage.setItem("test local storage", 1);
-      console.log(localStorage);
+      console.log("select debugger", this.$props.selectOptions);
     },
     setCurrency() {
       this.setCurrencyFirstGraph(this.value);

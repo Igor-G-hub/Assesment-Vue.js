@@ -28,9 +28,6 @@ export default {
   methods: {
     ...mapActions("store", ["fetchingData"])
   },
-  computed: {
-    ...mapGetters("store", ["test"])
-  },
 
   mounted() {
     this.fetchingData();
@@ -52,8 +49,8 @@ export default {
     // Axios.get(
     //   `https://api.hnb.hr/tecajn/v1?datum-od=${firstDay}&datum-do=${lastDay}`
     // );
-    // // .then(res => console.log(""))
-    // // .catch(err => console.log(err));
+    // .then(res => commit("setData", res.data))
+    //   .catch(err => console.log(err));
   }
 };
 </script>
