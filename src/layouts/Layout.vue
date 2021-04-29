@@ -29,28 +29,8 @@ export default {
     ...mapActions("store", ["fetchingData"])
   },
 
-  mounted() {
+  created() {
     this.fetchingData();
-
-    // const today = new Date();
-    // const yyyyLastDay = today.getFullYear();
-    // const mmLastDay = String(today.getMonth() + 1).padStart(2, "0");
-    // const ddLastDay = String(today.getDate()).padStart(2, "0");
-    // const lastDay = yyyyLastDay + "-" + mmLastDay + "-" + ddLastDay;
-
-    // let firstDay = new Date(today);
-    // const rangeOfDays = 6;
-    // firstDay.setDate(firstDay.getDate() - rangeOfDays);
-    // const yyyyFirstDay = firstDay.getFullYear();
-    // const mmFirstDay = String(firstDay.getMonth() + 1).padStart(2, "0");
-    // const ddFirstDay = String(firstDay.getDate()).padStart(2, "0");
-    // firstDay = yyyyFirstDay + "-" + mmFirstDay + "-" + ddFirstDay;
-
-    // Axios.get(
-    //   `https://api.hnb.hr/tecajn/v1?datum-od=${firstDay}&datum-do=${lastDay}`
-    // );
-    // .then(res => commit("setData", res.data))
-    //   .catch(err => console.log(err));
   }
 };
 </script>

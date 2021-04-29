@@ -40,8 +40,9 @@ const actions = {
         const option = state.optionsFirstGraph;
         let res = response.data;
         res = res.filter(row => option.indexOf(row.Valuta) > -1);
-        commit("setData", res);
         console.log("fetching", res);
+        commit("setData", res);
+        
       })
       .catch(err => console.log(err));
   }
@@ -50,15 +51,27 @@ const actions = {
 const getters = {
   labelSetFirstGraph: state => state.selectedCurrencyFirstGraph,
   optionsFirstGraph: state => state.optionsFirstGraph,
-  setExchangeRateFirstGraph: state => {
-    const currency = state.selectedCurrencyFirstGraph;
+  setGraphsDates: state => {
     const data = state.data;
-    let exchangeArray = [];
-    data.filter(row => {
+     const arrayOfDates = data.map(row => row.['Datum primjene']);     
+     const reduceDuplicateDates = arrayOfDates.reduce((accum, currVal) => {
+      if (accum.indexOf(currVal) == -1) {
+          accum.push(currVal);
+      }
+      return accum;
+    }, []);
+    return reduceDuplicateDates;         
+  },
+  setExchRatesFirstGraph: state => {
+    const data = state.data;
+    const currency = state.selectedCurrencyFirstGraph;
+    const arrayOfRates = [];
+    data.map(row => {
       if (row.Valuta == currency) {
-        exchangeArray.push();
+        arrayOfRates.push(row.['Srednji za devize'].replace(',', '.'))
       }
     });
+    return arrayOfRates; 
   }
 };
 

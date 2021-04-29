@@ -29,7 +29,7 @@ export default {
     ...mapState("store", ["selectedCurrencyFirstGraph"]),
     ...mapMutations("store", ["setCurrencyFirstGraph"]),
     debuger() {
-      console.log("select debugger", this.$props.selectOptions);
+      console.log("select debugger", this.value);
     },
     setCurrency() {
       this.setCurrencyFirstGraph(this.value);
