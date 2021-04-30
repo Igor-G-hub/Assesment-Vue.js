@@ -12,7 +12,7 @@
 <script>
 import BarChart from "./BarChart.vue";
 import SelectFirst from "./SelectFirst.vue";
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 
 export default {
   components: {
@@ -43,16 +43,23 @@ export default {
       };
       this.options = this.optionsFirstGraph;
     },
+    ...mapMutations("store", ["storageCurrencyFirstGraph"]),
     debuger() {
       this.fillData();
-      console.log("debugger", this.setGraphsDate);
     }
   },
   computed: {
-    ...mapGetters("store", ["labelSetFirstGraph"]),
-    ...mapGetters("store", ["optionsFirstGraph"]),
-    ...mapGetters("store", ["setGraphsDates"]),
-    ...mapGetters("store", ["setExchRatesFirstGraph"])
+    ...mapGetters("store", [
+      "labelSetFirstGraph",
+      "optionsFirstGraph",
+      "setGraphsDates",
+      "setExchRatesFirstGraph"
+    ])
+  },
+  watch: {
+    setExchRatesFirstGraph() {
+      this.fillData();
+    }
   }
 };
 </script>

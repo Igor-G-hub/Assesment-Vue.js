@@ -10,7 +10,6 @@
       :options="options"
       label=""
     />
-    <button @click="debuger()">Debuger</button>
   </div>
 </template>
 <script>
@@ -28,14 +27,8 @@ export default {
   methods: {
     ...mapState("store", ["selectedCurrencyFirstGraph"]),
     ...mapMutations("store", ["setCurrencyFirstGraph"]),
-    debuger() {
-      console.log("select debugger", this.value);
-    },
     setCurrency() {
       this.setCurrencyFirstGraph(this.value);
-    },
-    mounted() {
-      console.log(localStorage);
     }
   }
 };

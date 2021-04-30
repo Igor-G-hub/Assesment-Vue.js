@@ -21,15 +21,16 @@
 </template>
 
 <script>
-import Axios from "axios";
-import { mapGetters, mapActions } from "vuex";
+import { mapActions, mapMutations } from "vuex";
 export default {
   components: {},
   methods: {
-    ...mapActions("store", ["fetchingData"])
+    ...mapActions("store", ["fetchingData"]),
+    ...mapMutations("store", ["storageCurrencyFirstGraph"])
   },
 
   created() {
+    this.storageCurrencyFirstGraph();
     this.fetchingData();
   }
 };

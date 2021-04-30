@@ -9,12 +9,21 @@ const state = {
 const mutations = {
   setData: (state, res) => {
     state.data = res;
-    console.log("mutations setData", res);
-  },
+   },
 
   setCurrencyFirstGraph: (state, payload) => {
     state.selectedCurrencyFirstGraph = payload;
-  }
+    localStorage.setItem('selectedCurrencyFirstGraph', payload);    
+  },
+
+  storageCurrencyFirstGraph: (state) => {
+    if (localStorage.selectedCurrencyFirstGraph) {
+      state.selectedCurrencyFirstGraph = localStorage.selectedCurrencyFirstGraph;
+    }
+    console.log('localStorage', localStorage);
+    console.log('sessionStorage', sessionStorage);
+   
+ }
 };
 
 const actions = {
@@ -49,7 +58,9 @@ const actions = {
 };
 
 const getters = {
-  labelSetFirstGraph: state => state.selectedCurrencyFirstGraph,
+  labelSetFirstGraph: state => {
+    return state.selectedCurrencyFirstGraph
+  },
   optionsFirstGraph: state => state.optionsFirstGraph,
   setGraphsDates: state => {
     const data = state.data;
@@ -60,6 +71,7 @@ const getters = {
       }
       return accum;
     }, []);
+    
     return reduceDuplicateDates;         
   },
   setExchRatesFirstGraph: state => {
