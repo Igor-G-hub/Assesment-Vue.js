@@ -2,21 +2,21 @@
   <div>
     <q-select
       @input="
-        setCurrency();
+        setCountry();
         fillData();
       "
+      class="select-second"
       standout="bg-red text-white"
       v-model="value"
       :options="options"
-      label="Currency"
+      label="Countries"
     />
   </div>
 </template>
 <script>
-import { mapMutations, mapState } from "vuex";
-
+import { mapMutations } from "vuex";
 export default {
-  name: "InputSecond",
+  name: "Input",
   props: ["selectOptions", "fillData"],
   data() {
     return {
@@ -25,10 +25,9 @@ export default {
     };
   },
   methods: {
-    ...mapState("store", ["selectedCurrencyFirstGraph"]),
-    ...mapMutations("store", ["setCurrencyFirstGraph"]),
-    setCurrency() {
-      this.setCurrencyFirstGraph(this.value);
+    ...mapMutations("store", ["setCountrySecondGraph"]),
+    setCountry() {
+      this.setCountrySecondGraph(this.value);
     }
   }
 };

@@ -3,7 +3,9 @@ import Axios from "axios";
 const state = {
   data: [],
   selectedCurrencyFirstGraph: "",
-  optionsFirstGraph: ["EUR", "USD", "AUD", "GBP"]
+  selectedCountrySecondGraph: "",
+  optionsFirstGraph: ["EUR", "USD", "AUD", "GBP"],
+  optionsAndLabelsSecondGraph: {Poljska: 'PLN', Japan: 'JPY', Češka: 'CZK', Švicarska: 'CHF'}
 };
 
 const mutations = {
@@ -16,12 +18,14 @@ const mutations = {
     localStorage.setItem('selectedCurrencyFirstGraph', payload);    
   },
 
+  setCountrySecondGraph: (state, payload) => {
+      state.selectedCountrySecondGraph = payload;
+  },
+
   storageCurrencyFirstGraph: (state) => {
     if (localStorage.selectedCurrencyFirstGraph) {
       state.selectedCurrencyFirstGraph = localStorage.selectedCurrencyFirstGraph;
     }
-    console.log('localStorage', localStorage);
-    console.log('sessionStorage', sessionStorage);
    
  }
 };
@@ -58,10 +62,22 @@ const actions = {
 };
 
 const getters = {
-  labelSetFirstGraph: state => {
-    return state.selectedCurrencyFirstGraph
+  labelSetFirstGraph: state => state.selectedCurrencyFirstGraph,
+  labelSetSecondGraph: state => {
+    const country = state.selectedCountrySecondGraph;
+    const optionsObject = state.optionsAndLabelsSecondGraph;
+    
   },
+  
   optionsFirstGraph: state => state.optionsFirstGraph,
+  optionsSecondGraph: state => {
+    const options = state.optionsAndLabelsSecondGraph;
+    let countryArray = [];
+    for (let country in options) {
+      countryArray.push(country);
+    }
+    return countryArray;
+  },
   setGraphsDates: state => {
     const data = state.data;
      const arrayOfDates = data.map(row => row.['Datum primjene']);     
