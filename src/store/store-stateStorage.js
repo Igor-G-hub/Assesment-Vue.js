@@ -20,14 +20,21 @@ const mutations = {
 
   setCountrySecondGraph: (state, payload) => {
       state.selectedCountrySecondGraph = payload;
+      localStorage.setItem('selectedCountrySecondGraph', payload);
+      
   },
 
-  storageCurrencyFirstGraph: (state) => {
+  storageCurrencyFirstGraph: state => {
     if (localStorage.selectedCurrencyFirstGraph) {
       state.selectedCurrencyFirstGraph = localStorage.selectedCurrencyFirstGraph;
     }
-   
- }
+  },
+
+  storageCountrySecondGraph: state => {
+    if (localStorage.selectedCountrySecondGraph) {
+      state.selectedCountrySecondGraph = localStorage.selectedCountrySecondGraph;
+    }
+  }
 };
 
 const actions = {
@@ -50,12 +57,16 @@ const actions = {
       `https://api.hnb.hr/tecajn/v1?datum-od=${firstDay}&datum-do=${lastDay}`
     )
       .then(response => {
-        const option = state.optionsFirstGraph;
+        const optionsArrayFirstGraph = state.optionsFirstGraph;
+        const optionsObjectSecondGraph = state.optionsAndLabelsSecondGraph;
+        const optionsArraySecondGraph = [];
+            for (let country in optionsObjectSecondGraph) {
+              optionsArraySecondGraph.push(country);
+            };
         let res = response.data;
-        res = res.filter(row => option.indexOf(row.Valuta) > -1);
-        console.log("fetching", res);
+        res = res.filter(row => optionsArrayFirstGraph.indexOf(row.Valuta) > -1 ||
+        optionsArraySecondGraph.indexOf(row.Država) > -1);
         commit("setData", res);
-        
       })
       .catch(err => console.log(err));
   }
@@ -66,7 +77,8 @@ const getters = {
   labelSetSecondGraph: state => {
     const country = state.selectedCountrySecondGraph;
     const optionsObject = state.optionsAndLabelsSecondGraph;
-    
+    const currencyLabel = optionsObject[country];
+    return currencyLabel;
   },
   
   optionsFirstGraph: state => state.optionsFirstGraph,
@@ -97,6 +109,18 @@ const getters = {
     data.map(row => {
       if (row.Valuta == currency) {
         arrayOfRates.push(row.['Srednji za devize'].replace(',', '.'))
+      }
+    });
+    return arrayOfRates; 
+  },
+
+  setExchRatesSecondGraph: state => {
+    const data = state.data;
+    const country = state.selectedCountrySecondGraph;
+    const arrayOfRates = [];
+    data.map(row => {
+      if (row.Država == country) {
+        arrayOfRates.push(row.['Srednji za devize'].replace(',', '.'));
       }
     });
     return arrayOfRates; 

@@ -8,7 +8,6 @@
         :selectOptions="options"
         :fillData="fillData"
       />
-      <button @click="debuger()">Debugger</button>
     </div>
   </q-page>
 </template>
@@ -38,29 +37,27 @@ export default {
         labels: this.setGraphsDates,
         datasets: [
           {
-            label: "LABEL",
+            label: this.labelSetSecondGraph,
             backgroundColor: "#f87979",
-            data: [
-              "5.213565",
-              "6.245245",
-              "7.444456",
-              "8.444757",
-              "6.8987456",
-              "8.523466",
-              "7.452654"
-            ]
+            data: this.setExchRatesSecondGraph
           }
         ]
       };
       this.options = this.optionsSecondGraph;
-    },
-    debuger() {
-      this.fillData();
-      console.log("secondPage", this.optionsSecondGraph);
     }
   },
   computed: {
-    ...mapGetters("store", ["setGraphsDates", "optionsSecondGraph"])
+    ...mapGetters("store", [
+      "setGraphsDates",
+      "optionsSecondGraph",
+      "labelSetSecondGraph",
+      "setExchRatesSecondGraph"
+    ])
+  },
+  watch: {
+    setExchRatesSecondGraph() {
+      this.fillData();
+    }
   }
 };
 </script>

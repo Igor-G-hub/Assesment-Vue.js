@@ -1,10 +1,16 @@
 <template>
-  <q-page padding class="flex flex-center">
-    <div class="small">
+  <q-page padding class="flex flex-center column">
+    <div class="arrow-right">
+      <img src="../components/arrow-right.svg" class="self-end arrow right" />
+    </div>
+    <div class="small row flex-center justify-around">
       <h5>Graph</h5>
       <BarChart :chart-data="datacollection"></BarChart>
-      <SelectFirst :selectOptions="options" :fillData="fillData" />
-      <button @click="debuger()">Debugger</button>
+      <SelectFirst
+        class="select"
+        :selectOptions="options"
+        :fillData="fillData"
+      />
     </div>
   </q-page>
 </template>
@@ -13,6 +19,7 @@
 import BarChart from "./BarChart.vue";
 import SelectFirst from "./SelectFirst.vue";
 import { mapGetters, mapMutations } from "vuex";
+import arrowRight from "../components/arrow-right.svg";
 
 export default {
   components: {
@@ -43,10 +50,7 @@ export default {
       };
       this.options = this.optionsFirstGraph;
     },
-    ...mapMutations("store", ["storageCurrencyFirstGraph"]),
-    debuger() {
-      this.fillData();
-    }
+    ...mapMutations("store", ["storageCurrencyFirstGraph"])
   },
   computed: {
     ...mapGetters("store", [
@@ -66,7 +70,20 @@ export default {
 
 <style>
 .small {
-  max-width: 600px;
-  margin: 100px auto;
+  width: 80%;
+  margin: 70px auto;
+}
+.arrow-right {
+  background-color: blue;
+}
+
+.arrow-right img {
+  width: 40px;
+  height: 40px;
+}
+.flex.flex-center {
+}
+.select {
+  width: 30%;
 }
 </style>

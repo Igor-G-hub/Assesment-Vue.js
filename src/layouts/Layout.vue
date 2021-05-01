@@ -1,18 +1,18 @@
 <template>
   <q-layout view="hHh lpr fFf">
-    <q-header elevated class="bg-primary text-white">
+    <q-header elevated class="bg-blue-8 text-white">
       <q-toolbar>
-        <q-toolbar-title class="">
+        <q-toolbar-title class="q-ml-lg">
           Logo
         </q-toolbar-title>
       </q-toolbar>
     </q-header>
-    <q-page-container class="flex flex-center">
+    <q-page-container>
       <router-view />
     </q-page-container>
-    <q-footer elevated class="bg-grey-8 text-white footer-center">
+    <q-footer elevated class="bg-blue-8 text-white">
       <q-toolbar>
-        <q-toolbar-title class="justify-center">
+        <q-toolbar-title class="footer text-center">
           Copyright 2021
         </q-toolbar-title>
       </q-toolbar>
@@ -26,14 +26,22 @@ export default {
   components: {},
   methods: {
     ...mapActions("store", ["fetchingData"]),
-    ...mapMutations("store", ["storageCurrencyFirstGraph"])
+    ...mapMutations("store", [
+      "storageCurrencyFirstGraph",
+      "storageCountrySecondGraph"
+    ])
   },
 
   created() {
     this.storageCurrencyFirstGraph();
+    this.storageCountrySecondGraph();
     this.fetchingData();
   }
 };
 </script>
 
-<style></style>
+<style>
+.footer {
+  font-size: 0.8rem;
+}
+</style>
