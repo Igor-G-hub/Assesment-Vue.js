@@ -1,13 +1,15 @@
 <template>
-  <q-page padding class="flex flex-center column">
-    <div class="arrow-right">
-      <img src="../components/arrow-right.svg" class="self-end arrow right" />
+  <q-page padding class="flex flex-center row">
+    <div class="arrow-right row justify-end">
+      <router-link to="/by-country">
+        <img src="../components/arrow-right.svg" />
+      </router-link>
     </div>
+    <h5 class="text-center">Exchange Rate Chart</h5>
     <div class="small row flex-center justify-around">
-      <h5>Graph</h5>
       <BarChart :chart-data="datacollection"></BarChart>
       <SelectFirst
-        class="select"
+        class="col-xl-4 col-lg-4 col-sm-4 col-xs-6"
         :selectOptions="options"
         :fillData="fillData"
       />
@@ -16,10 +18,9 @@
 </template>
 
 <script>
-import BarChart from "./BarChart.vue";
-import SelectFirst from "./SelectFirst.vue";
+import BarChart from "../components/BarChart.vue";
+import SelectFirst from "../components/SelectFirst.vue";
 import { mapGetters, mapMutations } from "vuex";
-import arrowRight from "../components/arrow-right.svg";
 
 export default {
   components: {
@@ -71,19 +72,19 @@ export default {
 <style>
 .small {
   width: 80%;
-  margin: 70px auto;
+  margin: 0 auto;
 }
 .arrow-right {
-  background-color: blue;
+  width: 100%;
 }
 
 .arrow-right img {
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
+  margin-right: 100px;
 }
-.flex.flex-center {
-}
-.select {
-  width: 30%;
+
+h5 {
+  width: 100%;
 }
 </style>
